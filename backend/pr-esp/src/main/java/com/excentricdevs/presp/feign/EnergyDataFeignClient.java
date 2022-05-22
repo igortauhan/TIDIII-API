@@ -1,5 +1,6 @@
 package com.excentricdevs.presp.feign;
 
+import com.excentricdevs.presp.dto.EnergyDataDto;
 import com.excentricdevs.presp.models.EnergyData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -12,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface EnergyDataFeignClient {
 
     @PostMapping
-    public ResponseEntity<EnergyData> insert(@RequestBody EnergyData energyData);
+    public ResponseEntity<EnergyDataDto> insert(@RequestBody EnergyDataDto energyData);
 }

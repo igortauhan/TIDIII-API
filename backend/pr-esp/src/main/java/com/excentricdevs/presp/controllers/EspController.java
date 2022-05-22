@@ -1,6 +1,6 @@
 package com.excentricdevs.presp.controllers;
 
-import com.excentricdevs.presp.models.EnergyData;
+import com.excentricdevs.presp.dto.EnergyDataDto;
 import com.excentricdevs.presp.services.EspService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +17,9 @@ public class EspController {
     private EspService espService;
 
     @PostMapping
-    public ResponseEntity<EnergyData> insert(@RequestBody EnergyData energyData) {
-        energyData = espService.insert(energyData);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(energyData.getId()).toUri();
-        return ResponseEntity.created(uri).body(energyData);
+    public ResponseEntity<EnergyDataDto> insert(@RequestBody EnergyDataDto energyDataDto) {
+        energyDataDto = espService.insert(energyDataDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(energyDataDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(energyDataDto);
     }
 }
