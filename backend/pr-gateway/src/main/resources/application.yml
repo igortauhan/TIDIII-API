@@ -7,5 +7,12 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 spring:
+  cloud:
+    gateway:
+      routes:
+        - id: pr-esp
+          uri: lb://pr-esp/esp
+          predicates:
+            - Path=/esp/**
   application:
     name: gateway-service
