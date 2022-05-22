@@ -14,6 +14,7 @@ import java.util.Date;
 @Setter
 public class EnergyData {
 
+    private String id;
     private Integer value;
     @JsonProperty("registration_date")
     private Date registrationDate;
