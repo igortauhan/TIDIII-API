@@ -39,4 +39,8 @@ public class EnergyDataService {
         energyData = energyDataRepository.save(energyData);
         return energyData;
     }
+
+    public void delete(String id) {
+        energyDataRepository.deleteById(id);
+    }
 }

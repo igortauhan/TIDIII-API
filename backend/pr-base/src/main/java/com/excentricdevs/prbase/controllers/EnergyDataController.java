@@ -39,4 +39,10 @@ public class EnergyDataController {
         energyData = energyDataService.update(energyData, id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<EnergyData> delete(@PathVariable String id) {
+        energyDataService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
