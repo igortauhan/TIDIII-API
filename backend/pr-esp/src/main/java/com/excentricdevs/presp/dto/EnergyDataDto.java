@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class EnergyDataDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
+    @NotNull(message = "O valor do gasto não pode ser nulo!")
     private Integer value;
     @JsonProperty("registration_date")
     private Date registrationDate;

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -28,14 +29,14 @@ public class EnergyDataController {
     }
 
     @PostMapping
-    public ResponseEntity<EnergyDataDto> insert(@RequestBody EnergyDataDto energyDataDto) {
+    public ResponseEntity<EnergyDataDto> insert(@RequestBody @Valid EnergyDataDto energyDataDto) {
         energyDataDto = energyDataService.insert(energyDataDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(energyDataDto.getId()).toUri();
         return ResponseEntity.created(uri).body(energyDataDto);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<EnergyDataDto> update(@RequestBody EnergyDataDto energyDataDto, @PathVariable String id) {
+    public ResponseEntity<EnergyDataDto> update(@RequestBody @Valid EnergyDataDto energyDataDto, @PathVariable String id) {
         energyDataDto = energyDataService.update(energyDataDto, id);
         return ResponseEntity.noContent().build();
     }

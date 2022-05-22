@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -17,7 +18,7 @@ public class EspController {
     private EspService espService;
 
     @PostMapping
-    public ResponseEntity<EnergyDataDto> insert(@RequestBody EnergyDataDto energyDataDto) {
+    public ResponseEntity<EnergyDataDto> insert(@RequestBody @Valid EnergyDataDto energyDataDto) {
         energyDataDto = espService.insert(energyDataDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(energyDataDto.getId()).toUri();
         return ResponseEntity.created(uri).body(energyDataDto);
