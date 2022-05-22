@@ -3,6 +3,7 @@ package com.excentricdevs.prbase.services;
 import com.excentricdevs.prbase.dto.EnergyDataDto;
 import com.excentricdevs.prbase.models.EnergyData;
 import com.excentricdevs.prbase.repositories.EnergyDataRepository;
+import com.excentricdevs.prbase.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,9 @@ public class EnergyDataService {
 
     public EnergyDataDto findById(String id) {
         Optional<EnergyData> energyData = energyDataRepository.findById(id);
-        return new EnergyDataDto(energyData.orElse(null));
+        return new EnergyDataDto(energyData.orElseThrow(
+                () -> new ObjectNotFoundException("Registro de energia não encontrado. Id:" + id)
+        ));
     }
 
     public EnergyDataDto insert(EnergyDataDto energyDataDto) {
