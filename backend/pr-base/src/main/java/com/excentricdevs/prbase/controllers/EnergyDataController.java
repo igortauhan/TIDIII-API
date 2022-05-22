@@ -33,4 +33,10 @@ public class EnergyDataController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(energyData.getId()).toUri();
         return ResponseEntity.created(uri).body(energyData);
     }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<EnergyData> update(@RequestBody EnergyData energyData, @PathVariable String id) {
+        energyData = energyDataService.update(energyData, id);
+        return ResponseEntity.noContent().build();
+    }
 }

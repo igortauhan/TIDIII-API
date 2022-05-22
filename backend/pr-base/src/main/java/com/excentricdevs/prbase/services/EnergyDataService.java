@@ -25,8 +25,18 @@ public class EnergyDataService {
     }
 
     public EnergyData insert(EnergyData energyData) {
+        energyData.setId(null);
         energyData.setRegistrationDate(new Date());
         energyData = energyDataRepository.insert(energyData);
+        return energyData;
+    }
+
+    public EnergyData update(EnergyData newEnergyData, String id) {
+        EnergyData energyData = findById(id);
+        energyData.setValue(newEnergyData.getValue());
+        energyData.setRegistrationDate(new Date());
+
+        energyData = energyDataRepository.save(energyData);
         return energyData;
     }
 }
