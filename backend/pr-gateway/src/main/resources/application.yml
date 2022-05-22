@@ -14,5 +14,9 @@ spring:
           uri: lb://pr-esp/esp
           predicates:
             - Path=/esp/**
+        - id: pr-base
+          uri: lb://pr-base/energy
+          predicates:
+            - Path=/energy/**
   application:
     name: gateway-service
