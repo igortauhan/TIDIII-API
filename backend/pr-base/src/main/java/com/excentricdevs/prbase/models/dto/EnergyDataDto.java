@@ -1,4 +1,4 @@
-package com.excentricdevs.prbase.dto;
+package com.excentricdevs.prbase.models.dto;
 
 import com.excentricdevs.prbase.models.EnergyData;
 import com.fasterxml.jackson.annotation.JsonProperty;

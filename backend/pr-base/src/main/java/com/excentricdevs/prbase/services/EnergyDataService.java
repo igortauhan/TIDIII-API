@@ -1,6 +1,6 @@
 package com.excentricdevs.prbase.services;
 
-import com.excentricdevs.prbase.dto.EnergyDataDto;
+import com.excentricdevs.prbase.models.dto.EnergyDataDto;
 import com.excentricdevs.prbase.models.EnergyData;
 import com.excentricdevs.prbase.repositories.EnergyDataRepository;
 import com.excentricdevs.prbase.services.exceptions.ObjectNotFoundException;
