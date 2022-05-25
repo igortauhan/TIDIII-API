@@ -3,6 +3,9 @@ package com.excentricdevs.prbase.controllers;
 import com.excentricdevs.prbase.models.dto.EnergyDataDto;
 import com.excentricdevs.prbase.services.EnergyDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,8 +22,8 @@ public class EnergyDataController {
     private EnergyDataService energyDataService;
 
     @GetMapping
-    public ResponseEntity<List<EnergyDataDto>> findAll() {
-        return ResponseEntity.ok(energyDataService.findAll());
+    public ResponseEntity<Page<EnergyDataDto>> findAll(@PageableDefault(size = 30) Pageable pageable) {
+        return ResponseEntity.ok(energyDataService.findAll(pageable));
     }
 
     @GetMapping(path = "/{id}")

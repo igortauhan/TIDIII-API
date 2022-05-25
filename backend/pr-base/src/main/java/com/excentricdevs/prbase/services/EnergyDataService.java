@@ -5,6 +5,8 @@ import com.excentricdevs.prbase.models.EnergyData;
 import com.excentricdevs.prbase.repositories.EnergyDataRepository;
 import com.excentricdevs.prbase.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,9 +20,9 @@ public class EnergyDataService {
     @Autowired
     private EnergyDataRepository energyDataRepository;
 
-    public List<EnergyDataDto> findAll() {
-        List<EnergyData> energyDataList = energyDataRepository.findAll();
-        return energyDataList.stream().map(EnergyDataDto::new).collect(Collectors.toList());
+    public Page<EnergyDataDto> findAll(Pageable pageable) {
+        Page<EnergyData> energyDataList = energyDataRepository.findAll(pageable);
+        return energyDataList.map(EnergyDataDto::new);
     }
 
     public EnergyDataDto findById(String id) {
