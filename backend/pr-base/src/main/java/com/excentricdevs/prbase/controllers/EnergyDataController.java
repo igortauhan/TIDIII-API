@@ -1,6 +1,6 @@
 package com.excentricdevs.prbase.controllers;
 
-import com.excentricdevs.prbase.dto.EnergyDataDto;
+import com.excentricdevs.prbase.models.dto.EnergyDataDto;
 import com.excentricdevs.prbase.services.EnergyDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
