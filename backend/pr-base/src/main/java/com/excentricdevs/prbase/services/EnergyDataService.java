@@ -52,6 +52,26 @@ public class EnergyDataService {
         energyDataRepository.deleteById(id);
     }
 
+    public Integer getAvarageValuesByDates(Date initDate, Date finalDate) {
+        List<EnergyData> energyDataList = findByRegistrationDateBetween(initDate, finalDate);
+        return getAvarageValues(energyDataList);
+    }
+
+    private Integer getAvarageValues(List<EnergyData> energyDataList) {
+        int aux = 0;
+
+        for (EnergyData energyData:
+                energyDataList) {
+            aux += energyData.getValue();
+        }
+
+        return aux / energyDataList.toArray().length;
+    }
+
+    private List<EnergyData> findByRegistrationDateBetween(Date initDate, Date finalDate) {
+        return energyDataRepository.findByRegistrationDateBetween(initDate, finalDate);
+    }
+
     private EnergyData fromDto(EnergyDataDto energyDataDto) {
         return new EnergyData(energyDataDto.getId(), energyDataDto.getValue(), energyDataDto.getRegistrationDate());
     }
