@@ -18,5 +18,9 @@ spring:
           uri: lb://pr-base/energy
           predicates:
             - Path=/energy/**
+        - id: pr-base
+          uri: lb://pr-base/storaged
+          predicates:
+            - Path=/storaged/**
   application:
     name: gateway-service

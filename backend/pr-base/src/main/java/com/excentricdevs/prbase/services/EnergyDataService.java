@@ -5,6 +5,8 @@ import com.excentricdevs.prbase.models.EnergyData;
 import com.excentricdevs.prbase.repositories.EnergyDataRepository;
 import com.excentricdevs.prbase.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,9 +20,9 @@ public class EnergyDataService {
     @Autowired
     private EnergyDataRepository energyDataRepository;
 
-    public List<EnergyDataDto> findAll() {
-        List<EnergyData> energyDataList = energyDataRepository.findAll();
-        return energyDataList.stream().map(EnergyDataDto::new).collect(Collectors.toList());
+    public Page<EnergyDataDto> findAll(Pageable pageable) {
+        Page<EnergyData> energyDataList = energyDataRepository.findAll(pageable);
+        return energyDataList.map(EnergyDataDto::new);
     }
 
     public EnergyDataDto findById(String id) {
@@ -48,6 +50,26 @@ public class EnergyDataService {
 
     public void delete(String id) {
         energyDataRepository.deleteById(id);
+    }
+
+    public Integer getAvarageValuesByDates(Date initDate, Date finalDate) {
+        List<EnergyData> energyDataList = findByRegistrationDateBetween(initDate, finalDate);
+        return getAvarageValues(energyDataList);
+    }
+
+    private Integer getAvarageValues(List<EnergyData> energyDataList) {
+        int aux = 0;
+
+        for (EnergyData energyData:
+                energyDataList) {
+            aux += energyData.getValue();
+        }
+
+        return aux / energyDataList.toArray().length;
+    }
+
+    private List<EnergyData> findByRegistrationDateBetween(Date initDate, Date finalDate) {
+        return energyDataRepository.findByRegistrationDateBetween(initDate, finalDate);
     }
 
     private EnergyData fromDto(EnergyDataDto energyDataDto) {

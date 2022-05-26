@@ -21,7 +21,6 @@ public class EnergyDataDto implements Serializable {
 
     private String id;
     @NotNull(message = "O valor do gasto não pode ser nulo!")
-    @NotBlank(message = "O valor do gasto nào pode ser nulo!")
     private Integer value;
     @JsonProperty("registration_date")
     private Date registrationDate;
