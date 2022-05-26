@@ -18,4 +18,9 @@ public class EnergyDataStoragedController {
     public Integer getSpent(@RequestParam Integer hours, @RequestParam Integer days) {
         return energyDataStoragedService.calculateSpent(hours, days);
     }
+
+    @GetMapping(value = "current-spent")
+    public Integer getCurrentSpent(@RequestParam Integer value, @RequestParam Integer hours, @RequestParam Integer days) {
+        return energyDataStoragedService.calculateCurrentSpent(value, hours, days);
+    }
 }

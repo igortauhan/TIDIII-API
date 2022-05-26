@@ -12,15 +12,20 @@ public class EnergyDataStoragedService {
     @Autowired
     private EnergyDataService energyDataService;
 
+    // valor da taxa do KWH
+    private final int tax = 57651;
+
     public Integer calculateSpent(Integer hours, Integer days) {
-        // valor da taxa do KWH
-        int tax = 57651;
         int avarageValue = getAvarageValue();
-        return calculateKwh(avarageValue, hours, days);
+        return (calculateKwh(avarageValue, hours, days)) * tax;
     }
 
-    private Integer calculateKwh(Integer avarageValue, Integer hours, Integer days) {
-        return (avarageValue * hours * days) / 1000;
+    public Integer calculateCurrentSpent(Integer value, Integer hours, Integer days) {
+        return (calculateKwh(value, hours, days)) * tax;
+    }
+
+    private Integer calculateKwh(Integer value, Integer hours, Integer days) {
+        return (value * hours * days) / 1000;
     }
 
     private Integer getAvarageValue() {
