@@ -49,10 +49,10 @@ services:
     networks:
       - tidiii
 
-  pr-search:
+  pr-esp:
     container_name: pr-esp
     build:
-      context: ./backend/pr-search/
+      context: ./backend/pr-esp/
       dockerfile: Dockerfile
     ports:
       - 8082:8082
