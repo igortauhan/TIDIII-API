@@ -23,4 +23,4 @@ spring:
           predicates:
             - Path=/storaged/**
   application:
-    name: gateway-service
+    name: pr-gateway
