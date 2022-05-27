@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  tidiii-database:
+    image: mongo
+    container_name: tidiii-database
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=12345
+    networks:
+      - tidiii
+
+  pr-eureka:
+    container_name: pr-eureka
+    build:
+      context: ./backend/pr-eureka/
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - tidiii
+
+  pr-gateway:
+    container_name: pr-gateway
+    build:
+      context: ./backend/pr-gateway/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - pr-eureka-server
+    networks:
+      - tidiii
+
+  pr-base:
+    container_name: pr-base
+    build:
+      context: ./backend/pr-base/
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    depends_on:
+      - pr-eureka
+      - tidiii-database
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://tidiii-database:27017/tidiii-db
+    networks:
+      - tidiii
+
+  pr-search:
+    container_name: pr-esp
+    build:
+      context: ./backend/pr-search/
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    depends_on:
+      - pr-eureka
+    networks:
+      - tidiii
+
+networks:
+  tidiii:
