@@ -26,6 +26,11 @@ public class EnergyDataController {
         return ResponseEntity.ok(energyDataService.findAll(pageable));
     }
 
+    @GetMapping(value = "/last")
+    public ResponseEntity<EnergyDataDto> findLastRecord() {
+        return ResponseEntity.ok(energyDataService.findLastRecord());
+    }
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<EnergyDataDto> findById(@PathVariable String id) {
         return ResponseEntity.ok(energyDataService.findById(id));

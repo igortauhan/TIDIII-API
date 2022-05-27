@@ -25,6 +25,10 @@ public class EnergyDataService {
         return energyDataList.map(EnergyDataDto::new);
     }
 
+    public EnergyDataDto findLastRecord() {
+        return new EnergyDataDto(energyDataRepository.findTopByOrderByIdDesc());
+    }
+
     public EnergyDataDto findById(String id) {
         Optional<EnergyData> energyData = energyDataRepository.findById(id);
         return new EnergyDataDto(energyData.orElseThrow(
