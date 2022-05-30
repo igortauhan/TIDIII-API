@@ -28,6 +28,10 @@ public class EnergyDataStoragedService {
         return (value * hours * days) / 1000;
     }
 
+//    private Integer convertAmpsToWatts(Integer amps) {
+//        return amps * 220;
+//    }
+
     private Integer getAvarageValue() {
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();

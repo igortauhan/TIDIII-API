@@ -12,12 +12,7 @@ public class EspService {
     private EnergyDataFeignClient energyDataFeignClient;
 
     public EnergyDataDto insert(EnergyDataDto energyDataDto) {
-        energyDataDto.setValue(convertAmpsToWatts(energyDataDto.getValue()));
         energyDataDto = energyDataFeignClient.insert(energyDataDto).getBody();
         return energyDataDto;
-    }
-
-    private int convertAmpsToWatts(int amps) {
-        return amps * 220;
     }
 }
