@@ -1,13 +1,12 @@
 package com.excentricdevs.prbase.models.dto;
 
 import com.excentricdevs.prbase.models.EnergyData;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,6 +22,7 @@ public class EnergyDataDto implements Serializable {
     @NotNull(message = "O valor do gasto não pode ser nulo!")
     private Integer value;
     @JsonProperty("registration_date")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date registrationDate;
 
     public EnergyDataDto(EnergyData energyData) {

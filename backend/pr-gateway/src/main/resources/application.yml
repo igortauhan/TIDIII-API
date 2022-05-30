@@ -5,6 +5,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+      #defaultZone: http://pr-eureka:8761/eureka
 
 spring:
   cloud:
@@ -23,4 +24,4 @@ spring:
           predicates:
             - Path=/storaged/**
   application:
-    name: gateway-service
+    name: pr-gateway

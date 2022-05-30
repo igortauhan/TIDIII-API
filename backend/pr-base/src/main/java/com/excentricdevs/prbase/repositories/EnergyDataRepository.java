@@ -11,4 +11,6 @@ import java.util.List;
 public interface EnergyDataRepository extends MongoRepository<EnergyData, String> {
 
     List<EnergyData> findByRegistrationDateBetween(Date initDate, Date finalDate);
+
+    EnergyData findTopByOrderByIdDesc();
 }
